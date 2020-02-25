@@ -12,7 +12,7 @@
 
 -export([on_client_connected/4, on_client_disconnected/3]).
 
--export([on_message_publish/2, on_message_delivered/3, on_message_acked/3]).
+-export([on_message_publish/2, on_message_delivered/3]).
 
 
 %% Called when the plugin application start
@@ -22,7 +22,6 @@ load(Env) ->
     emqx:hook('client.disconnected', fun ?MODULE:on_client_disconnected/3, [Env]),
     emqx:hook('message.publish', fun ?MODULE:on_message_publish/2, [Env]),
     emqx:hook('message.delivered', fun ?MODULE:on_message_delivered/3, [Env]).
-    emqx:hook('message.acked', fun ?MODULE:on_message_acked/3, [Env]).
 
 on_client_connected(#{client_id := ClientId, username := Username}, ConnAck, _ConnAttrs, _Env) ->
     if
@@ -64,16 +63,6 @@ on_message_delivered(#{client_id := ClientId, username := Username}, Message, _E
     produce_kafka_delivered(Event),
     {ok, Message}.
 
-on_message_acked(ClientId, Username, Message, _Env) ->
-    % io:format("client(~s/~s) acked: ~s~n", [Username, ClientId, emqttd_message:format(Message)]),
-    Event = [{action, <<"acked">>},
-                {from_client_id, ClientId},
-                {from_username, Username},
-                {topic, Message#message.topic},
-                {qos, Message#message.qos},
-                {message, Message#message.payload}],
-    produce_kafka_log(Event),
-    {ok, Message}.
 
 ekaf_init(_Env) ->
     {ok, BrokerValues} = application:get_env(emqx_bridge_kafka, broker),
@@ -141,7 +130,6 @@ unload() ->
     emqx:unhook('session.unsubscribed', fun ?MODULE:on_session_unsubscribed/4),
     emqx:unhook('message.publish', fun ?MODULE:on_message_publish/2),
     emqx:unhook('message.delivered', fun ?MODULE:on_message_delivered/3).
-    emqx:unhook('message.acked', fun ?MODULE:on_message_acked/3).
 
 produce_kafka_payload(Message) ->
     Topic = ekaf_get_topic(),
