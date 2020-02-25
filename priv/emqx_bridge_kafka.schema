@@ -1,76 +1,76 @@
 %%-*- mode: erlang -*-
 
-{mapping, "kafka.host", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.host", "emqx_bridge_kafka.broker", [
   {default, "127.0.0.1"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.port", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.port", "emqx_bridge_kafka.broker", [
   {default, "9092"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.partitionstrategy", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.partitionstrategy", "emqx_bridge_kafka.broker", [
   {default, "strict_round_robin"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.partitionworkers", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.partitionworkers", "emqx_bridge_kafka.broker", [
   {default, 8},
   {datatype, integer}
 ]}.
 
-{mapping, "kafka.payloadtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.payloadtopic", "emqx_bridge_kafka.broker", [
   {default, "Processing"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.publishtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.publishtopic", "emqx_bridge_kafka.broker", [
   {default, "Publish"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.connectedtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.connectedtopic", "emqx_bridge_kafka.broker", [
   {default, "Connected"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.disconnectedtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.disconnectedtopic", "emqx_bridge_kafka.broker", [
   {default, "Disconnected"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.subscribetopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.subscribetopic", "emqx_bridge_kafka.broker", [
   {default, "Subscribe"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.unsubscribetopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.unsubscribetopic", "emqx_bridge_kafka.broker", [
   {default, "Unsubscribe"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.deliveredtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.deliveredtopic", "emqx_bridge_kafka.broker", [
   {default, "Delivered"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.eventtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.eventtopic", "emqx_bridge_kafka.broker", [
   {default, "Event"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.sessioncreatedtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.sessioncreatedtopic", "emqx_bridge_kafka.broker", [
   {default, "SessionCreated"},
   {datatype, string}
 ]}.
 
-{mapping, "kafka.sessionterminatedtopic", "emqx_kafka_bridge.broker", [
+{mapping, "kafka.sessionterminatedtopic", "emqx_bridge_kafka.broker", [
   {default, "SessionTerminated"},
   {datatype, string}
 ]}.
 
-{translation, "emqx_kafka_bridge.broker", fun(Conf) ->
+{translation, "emqx_bridge_kafka.broker", fun(Conf) ->
   KafkaHost = cuttlefish:conf_get("kafka.host", Conf),
   KafkaPort = cuttlefish:conf_get("kafka.port", Conf),
   KafkaPartitionStrategy = cuttlefish:conf_get("kafka.partitionstrategy", Conf),
