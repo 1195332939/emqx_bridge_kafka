@@ -14,7 +14,7 @@
 %% limitations under the License.
 %%--------------------------------------------------------------------
 
--module(emqx_kafka_bridge_sup).
+-module(emqx_bridge_kafka_sup).
 
 -behaviour(supervisor).
 
