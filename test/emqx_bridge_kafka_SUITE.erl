@@ -1,4 +1,4 @@
--module(emqx_kafka_bridge_SUITE).
+-module(emqx_bridge_kafka_SUITE).
 
 -compile(export_all).
 
