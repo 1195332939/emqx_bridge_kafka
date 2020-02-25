@@ -1,0 +1,89 @@
+%%-*- mode: erlang -*-
+
+{mapping, "kafka.host", "emqx_kafka_bridge.broker", [
+  {default, "127.0.0.1"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.port", "emqx_kafka_bridge.broker", [
+  {default, "9092"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.partitionstrategy", "emqx_kafka_bridge.broker", [
+  {default, "strict_round_robin"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.partitionworkers", "emqx_kafka_bridge.broker", [
+  {default, 8},
+  {datatype, integer}
+]}.
+
+{mapping, "kafka.payloadtopic", "emqx_kafka_bridge.broker", [
+  {default, "Processing"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.publishtopic", "emqx_kafka_bridge.broker", [
+  {default, "Publish"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.connectedtopic", "emqx_kafka_bridge.broker", [
+  {default, "Connected"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.disconnectedtopic", "emqx_kafka_bridge.broker", [
+  {default, "Disconnected"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.subscribetopic", "emqx_kafka_bridge.broker", [
+  {default, "Subscribe"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.unsubscribetopic", "emqx_kafka_bridge.broker", [
+  {default, "Unsubscribe"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.deliveredtopic", "emqx_kafka_bridge.broker", [
+  {default, "Delivered"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.eventtopic", "emqx_kafka_bridge.broker", [
+  {default, "Event"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.sessioncreatedtopic", "emqx_kafka_bridge.broker", [
+  {default, "SessionCreated"},
+  {datatype, string}
+]}.
+
+{mapping, "kafka.sessionterminatedtopic", "emqx_kafka_bridge.broker", [
+  {default, "SessionTerminated"},
+  {datatype, string}
+]}.
+
+{translation, "emqx_kafka_bridge.broker", fun(Conf) ->
+  KafkaHost = cuttlefish:conf_get("kafka.host", Conf),
+  KafkaPort = cuttlefish:conf_get("kafka.port", Conf),
+  KafkaPartitionStrategy = cuttlefish:conf_get("kafka.partitionstrategy", Conf),
+  KafkaPartitionWorkers = cuttlefish:conf_get("kafka.partitionworkers", Conf),
+  KafkaPayloadTopic = cuttlefish:conf_get("kafka.payloadtopic", Conf),
+  KafkaPublishTopic = cuttlefish:conf_get("kafka.publishtopic", Conf),
+  KafkaConnectedTopic = cuttlefish:conf_get("kafka.connectedtopic", Conf),
+  KafkaDisconnectedTopic = cuttlefish:conf_get("kafka.disconnectedtopic", Conf),
+  KafkaSubscribeTopic = cuttlefish:conf_get("kafka.subscribetopic", Conf),
+  KafkaUnsubscribeTopic = cuttlefish:conf_get("kafka.unsubscribetopic", Conf),
+  KafkaDeliveredTopic = cuttlefish:conf_get("kafka.deliveredtopic", Conf),
+  KafkaEventTopic = cuttlefish:conf_get("kafka.eventtopic", Conf),
+  KafkaSessionCreatedTopic = cuttlefish:conf_get("kafka.sessioncreatedtopic", Conf),
+  KafkaSessionTerminatedTopic = cuttlefish:conf_get("kafka.sessionterminatedtopic", Conf),
+  [{sessioncreatedtopic, KafkaSessionCreatedTopic}, {sessionterminatedtopic, KafkaSessionTerminatedTopic}, {host, KafkaHost}, {port, KafkaPort}, {partitionstrategy, KafkaPartitionStrategy}, {partitionworkers, KafkaPartitionWorkers}, {eventtopic, KafkaEventTopic}, {payloadtopic, KafkaPayloadTopic}, {publishtopic, KafkaPublishTopic}, {connectedtopic, KafkaConnectedTopic}, {disconnectedtopic, KafkaDisconnectedTopic}, {subscribetopic, KafkaSubscribeTopic}, {unsubscribetopic, KafkaUnsubscribeTopic}, {deliveredtopic, KafkaDeliveredTopic}]
+  end}.
