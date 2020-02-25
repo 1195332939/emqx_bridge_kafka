@@ -1,5 +1,5 @@
 
-# emqx_kafka_bridge
+# emqx_bridge_kafka
 
 This is a plugin for the EMQX broker that sends all messages received by the broker to kafka.
 
@@ -12,21 +12,11 @@ This is a plugin for the EMQX broker that sends all messages received by the bro
       git clone https://github.com/emqx/emqx-rel.git
     ```
 
-2. Add EMQ Kafka bridge as a DEPS
-   Adding EMQ kafka bridge as a dependency in the Makefile.
-
-   1. search for `DEPS += $(foreach dep,$(MAIN_APPS),$(call app_name,$(dep)))`
-      add the following line before the above lines
-      > DEPS += emqx_kafka_bridge
-
-   2. search for
-
-     ```makefile
-     $(foreach dep,$(MAIN_APPS),$(eval dep_$(call app_name,$(dep)) = $(CLONE_METHOD) https://github.com/emqx/$(dep) $(call app_vsn,$(dep))))
-     ```
-
-     add the following line below the above lines
-     >dep_emqx_kafka_bridge = git <https://github.com/king-wood/emqx_kafka_bridge.git> master
+2. Open the rebar.config in the 
+{deps,
+   [{emqx_bridge_kafka, {git, "https://gitbub.com/1195332939/emqx_bridge_kafka.git", {tag, "master"}}},
+   ...,
+   ]}
 
 3. Add load plugin in relx.config
    >{emqx_kafka_bridge, load},
