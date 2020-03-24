@@ -1,7 +1,9 @@
+The plugin is not perfect, if you are in a hurry, please back to version 3.0, if you are using the official version 4.0, according to the format of the request hook.
 
 # emqx_bridge_kafka
 
 This is a plugin for the EMQX broker that sends all messages received by the broker to kafka.
+
 
 ## Build the EMQX broker
 
